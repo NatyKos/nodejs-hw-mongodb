@@ -1,5 +1,5 @@
 {
-  "name": "test-nodejs",
+  "name": "nodejs-hw2",
   "version": "1.0.0",
   "type": "module",
   "main": "src/index.js",
