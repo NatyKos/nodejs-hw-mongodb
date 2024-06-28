@@ -3,28 +3,9 @@ import cors from 'cors';
 import pino from 'pino-http';
 import env from './utils/env.js';
 import router from './routers/contacts.js';
-import createHttpError, { HttpError } from 'http-errors';
-import { isValidObjectId } from 'mongoose';
+import { HttpError } from 'http-errors';
 
 const PORT = Number(env('PORT', '3000'));
-
-export const isValidId = (req, res, next) => {
-  const { contactId } = req.params;
-  if (!isValidObjectId(contactId)) {
-    next(createHttpError(404, `${contactId} not valid id`));
-  }
-  next();
-};
-
-export const validateBody = (schema) => async (req, res, next) => {
-  try {
-    await schema.validateAsync(req.body, { abortEarly: false });
-    next();
-  } catch (err) {
-    const error = createHttpError(400, 'Bed Request', { errors: err.details });
-    next(error);
-  }
-};
 
 const errorHandler = (err, req, res, next) => {
   if (err instanceof HttpError) {

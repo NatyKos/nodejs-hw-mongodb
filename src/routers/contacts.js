@@ -1,26 +1,18 @@
 import { Router } from 'express';
 import {
+  createContactSchema,
+  updateContactSchema,
+} from '../validation/contacts.js';
+import {
   getContactController,
   getContactByIdController,
   createContactController,
   updateContactController,
   deleteContactController,
 } from '../controllers/contacts.js';
-import { isValidId, validateBody } from '../server.js';
-import {
-  createContactSchema,
-  updateContactSchema,
-} from '../validation/contacts.js';
-
-const ctrlWrapper = (controller) => {
-  return async (req, res, next) => {
-    try {
-      await controller(req, res, next);
-    } catch (err) {
-      next(err);
-    }
-  };
-};
+import { isValidId } from '../middlewares/isValidId.js';
+import { validateBody } from '../middlewares/validateBody.js';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 const router = Router();
 
