@@ -5,6 +5,7 @@ import env from './utils/env.js';
 import router from './routers/index.js';
 import errorHandler from './middlewares/errorHandler.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
+import cookieParser from 'cookie-parser';
 
 const PORT = Number(env('PORT', '3000'));
 
@@ -14,6 +15,7 @@ const setupServer = () => {
   app.use(express.json());
   app.use(logger);
   app.use(cors());
+  app.use(cookieParser());
   app.use(router);
   app.use(errorHandler);
   app.use('*', notFoundHandler);

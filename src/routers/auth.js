@@ -20,4 +20,5 @@ authRouter.post(
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
+
 export default authRouter;
